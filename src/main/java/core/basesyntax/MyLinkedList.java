@@ -79,7 +79,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     public T remove(int index) {
         if (index == 0) {
             return unlink(head);
-        } else if (index == size - 1) {
+        } else if (!isEmpty() && index == size - 1) {
             return unlink(tail);
         }
         Node<T> node = nodeOf(index);
