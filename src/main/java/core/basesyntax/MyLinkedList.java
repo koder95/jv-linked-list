@@ -85,7 +85,45 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T remove(int index) {
-        return null;
+        if (head == tail) {
+            if (index != 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            T value = head.value;
+            head.value = null;
+            head = null;
+            tail = null;
+            size--;
+            return value;
+        }
+        if (index == 0) {
+            Node<T> currentHead = head;
+            head = currentHead.next;
+            head.prev = null;
+            currentHead.next = null;
+            T value = currentHead.value;
+            currentHead.value = null;
+            size--;
+            return value;
+        } else if (index == size - 1) {
+            Node<T> currentTail = tail;
+            tail = currentTail.prev;
+            tail.next = null;
+            currentTail.prev = null;
+            T value = currentTail.value;
+            currentTail.value = null;
+            size--;
+            return value;
+        }
+        Node<T> node = nodeOf(index);
+        if (node == null) {
+            throw new IndexOutOfBoundsException();
+        }
+        T old = node.value;
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        size--;
+        return old;
     }
 
     @Override
