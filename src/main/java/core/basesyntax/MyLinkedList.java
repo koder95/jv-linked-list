@@ -49,6 +49,35 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
         return size() == 0;
     }
 
+    private int indexOf(T object) {
+        if (head == null) {
+            return -1;
+        }
+        Node<T> node = head;
+        int i = 0;
+        while (node != null) {
+            if (node.value == object || (node.value != null && node.value.equals(object))) {
+                return i;
+            }
+            node = node.next;
+            i++;
+        }
+        return -1;
+    }
+
+    private Node<T> nodeOf(int index) {
+        if (index < 0) {
+            return null;
+        }
+        Node<T> node = head;
+        int i = 0;
+        while (i < index) {
+            node = node.next;
+            i++;
+        }
+        return node;
+    }
+
     private static class Node<T> {
         Node<T> prev;
         T value;
