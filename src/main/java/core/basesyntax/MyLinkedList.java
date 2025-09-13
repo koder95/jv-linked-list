@@ -38,6 +38,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
             }
             size++;
         } else if (index < size) {
+            checkIndex(index);
             Node<T> current = nodeOf(index);
             if (current == null) {
                 throw new IndexOutOfBoundsException();
@@ -49,8 +50,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
             size++;
             if (index == size - 1) {
                 tail = node;
-            } else if (index == 0) {
-                head = node;
             }
         } else if (index == size) {
             add(value);
@@ -68,6 +67,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T get(int index) {
+        checkIndex(index);
         Node<T> node = nodeOf(index);
         if (node == null) {
             throw new IndexOutOfBoundsException();
@@ -77,6 +77,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T set(T value, int index) {
+        checkIndex(index);
         Node<T> node = nodeOf(index);
         if (node == null) {
             throw new IndexOutOfBoundsException();
@@ -88,6 +89,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T remove(int index) {
+        checkIndex(index);
         if (index == 0) {
             return unlink(head);
         } else if (index == size - 1) {
@@ -122,6 +124,12 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     @Override
     public boolean isEmpty() {
         return size() == 0;
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     private T unlink(Node<T> node) {
@@ -166,9 +174,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     }
 
     private Node<T> nodeOf(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkIndex(index);
         int half = size / 2;
         boolean fromBegin = index < half;
         Node<T> node = fromBegin ? head : tail;
