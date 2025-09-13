@@ -24,7 +24,9 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        Node<T> node = nodeOf(index);
+        if (node == null) throw new IndexOutOfBoundsException();
+        return node.value;
     }
 
     @Override
