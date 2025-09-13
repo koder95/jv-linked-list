@@ -42,15 +42,15 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
             Node<T> current = nodeOf(index);
             if (current == null) {
                 throw new IndexOutOfBoundsException();
+            } else if (current == tail) {
+                add(value);
+                return;
             }
             Node<T> prev = current.prev;
             Node<T> node = new Node<>(prev, value, current);
             prev.next = node;
             current.prev = node;
             size++;
-            if (index == size - 1) {
-                tail = node;
-            }
         } else if (index == size) {
             add(value);
         } else {
