@@ -31,7 +31,13 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T set(T value, int index) {
-        return null;
+        Node<T> node = nodeOf(index);
+        if (node == null) {
+            throw new IndexOutOfBoundsException();
+        }
+        T old = node.value;
+        node.value = value;
+        return old;
     }
 
     @Override
