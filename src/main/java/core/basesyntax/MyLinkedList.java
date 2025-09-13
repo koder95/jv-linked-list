@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     private Node<T> head = null;
@@ -151,6 +152,31 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     @Override
     public boolean isEmpty() {
         return size() == 0;
+    }
+
+    private T unlink(Node<T> node) {
+        if (node == null) {
+            throw new IllegalArgumentException("Node is not exist",
+                    new NoSuchElementException(new NullPointerException()));
+        }
+        Node<T> prev = node.prev;
+        node.prev = null;
+        Node<T> next = node.next;
+        node.next = null;
+        if (prev == null) {
+            head = next;
+        } else {
+            prev.next = next;
+        }
+        if (next == null) {
+            tail = prev;
+        } else {
+            next.prev = prev;
+        }
+        size--;
+        T value = node.value;
+        node.value = null;
+        return value;
     }
 
     private int indexOf(T object) {
