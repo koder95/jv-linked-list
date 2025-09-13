@@ -68,7 +68,9 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     @Override
     public T get(int index) {
         Node<T> node = nodeOf(index);
-        if (node == null) throw new IndexOutOfBoundsException();
+        if (node == null) {
+            throw new IndexOutOfBoundsException();
+        }
         return node.value;
     }
 
@@ -119,10 +121,11 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
         if (node == null) {
             throw new IndexOutOfBoundsException();
         }
-        T old = node.value;
         node.prev.next = node.next;
         node.next.prev = node.prev;
         size--;
+        T old = node.value;
+        node.value = null;
         return old;
     }
 
@@ -180,13 +183,37 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     }
 
     private static class Node<T> {
-        Node<T> prev;
-        T value;
-        Node<T> next;
+        private Node<T> prev;
+        private T value;
+        private Node<T> next;
 
-        Node(Node<T> prev, T value, Node<T> next) {
+        private Node(Node<T> prev, T value, Node<T> next) {
             this.prev = prev;
             this.value = value;
+            this.next = next;
+        }
+
+        public Node<T> getPrev() {
+            return prev;
+        }
+
+        public void setPrev(Node<T> prev) {
+            this.prev = prev;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
             this.next = next;
         }
     }
