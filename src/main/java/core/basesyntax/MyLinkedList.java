@@ -38,7 +38,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
             }
             size++;
         } else if (index < size) {
-            checkIndex(index);
             Node<T> current = nodeOf(index);
             if (current == null) {
                 throw new IndexOutOfBoundsException();
@@ -67,7 +66,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T get(int index) {
-        checkIndex(index);
         Node<T> node = nodeOf(index);
         if (node == null) {
             throw new IndexOutOfBoundsException();
@@ -77,7 +75,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T set(T value, int index) {
-        checkIndex(index);
         Node<T> node = nodeOf(index);
         if (node == null) {
             throw new IndexOutOfBoundsException();
@@ -89,7 +86,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public T remove(int index) {
-        checkIndex(index);
         if (index == 0) {
             return unlink(head);
         } else if (index == size - 1) {
