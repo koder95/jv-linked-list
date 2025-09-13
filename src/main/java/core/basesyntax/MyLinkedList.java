@@ -42,6 +42,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size() == 0;
     }
 }
