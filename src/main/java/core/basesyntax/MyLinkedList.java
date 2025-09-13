@@ -128,7 +128,16 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public boolean remove(T object) {
-        return false;
+        int index = indexOf(object);
+        if (index < 0) {
+            return false;
+        }
+        try {
+            remove(index);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     @Override
