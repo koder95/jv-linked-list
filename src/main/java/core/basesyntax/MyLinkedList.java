@@ -175,6 +175,11 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     private Node<T> nodeOf(int index) {
         checkIndex(index);
+        if (index == 0) {
+            return head;
+        } else if (index == size - 1) {
+            return tail;
+        }
         int half = size / 2;
         boolean fromBegin = index < half;
         Node<T> node = fromBegin ? head : tail;
