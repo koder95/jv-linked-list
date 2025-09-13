@@ -170,14 +170,21 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     }
 
     private Node<T> nodeOf(int index) {
-        if (index < 0) {
-            return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
         }
-        Node<T> node = head;
-        int i = 0;
-        while (i < index) {
-            node = node.next;
-            i++;
+        int half = size / 2;
+        boolean fromBegin = index < half;
+        Node<T> node = fromBegin ? head : tail;
+        int i = fromBegin ? 0 : size - 1;
+        while (i != index) {
+            if (fromBegin) {
+                node = node.next;
+                i++;
+            } else {
+                node = node.prev;
+                i--;
+            }
         }
         return node;
     }
