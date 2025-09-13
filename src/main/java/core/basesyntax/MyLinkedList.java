@@ -39,10 +39,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
             size++;
         } else if (index < size) {
             Node<T> current = nodeOf(index);
-            if (current == tail) {
-                add(value);
-                return;
-            }
             Node<T> prev = current.prev;
             Node<T> node = new Node<>(prev, value, current);
             prev.next = node;
